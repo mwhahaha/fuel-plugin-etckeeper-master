@@ -4,6 +4,9 @@
 - id: fuel-plugin-etckeeper-master
   type: group
   role: [master]
+  parameters:
+    strategy:
+      type: parallel
 
 - id: fuel-plugin-etckeeper-master-deployment-install
   type: puppet
