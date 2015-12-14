@@ -1,7 +1,7 @@
 # Plugin name
 name: fuel-plugin-etckeeper-master
 # Human-readable name for your plugin
-title: Plugin to install etckeeper on the Fuel master
+title: etckeeper for Fuel master
 # Plugin version
 version: '1.0.0'
 # Description
