@@ -10,7 +10,7 @@
 
 - id: fuel-plugin-etckeeper-master-deployment-install
   type: puppet
-  groups: [master]
+  role: [master]
   required_for: [post_deployment_end]
   requires: [post_deployment_start]
   parameters:
@@ -20,7 +20,7 @@
 
 - id: fuel-plugin-etckeeper-master-deployment-configure
   type: puppet
-  groups: [master]
+  role: [master]
   required_for: [post_deployment_end]
   requires: [fuel-plugin-etckeeper-master-deployment-install]
   parameters:
@@ -30,7 +30,7 @@
 
 - id: fuel-plugin-etckeeper-master-deployment-commit
   type: shell
-  groups: [master]
+  role: [master]
   required_for: [post_deployment_end]
   requires: [fuel-plugin-etckeeper-master-deployment-configure]
   parameters:
