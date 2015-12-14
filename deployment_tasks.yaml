@@ -1,0 +1,36 @@
+# These tasks will be merged into deployment graph. Here you
+# can specify new tasks for any roles, even built-in ones.
+
+- id: fuel-plugin-etckeeper-master
+  type: group
+  role: [master]
+
+- id: fuel-plugin-etckeeper-master-deployment-install
+  type: puppet
+  groups: [fuel-plugin-etckeeper-master]
+  required_for: [post_deployment_end]
+  requires: [post_deployment_start]
+  parameters:
+    puppet_manifest: "install_etckeeper.pp"
+    puppet_modules: "/etc/puppet/modules"
+    timeout: 600
+
+- id: fuel-plugin-etckeeper-master-deployment-configure
+  type: puppet
+  groups: [fuel-plugin-etckeeper-master]
+  required_for: [post_deployment_end]
+  requires: [fuel-plugin-etckeeper-master-deployment-install]
+  parameters:
+    puppet_manifest: "configure_etckeeper.pp"
+    puppet_modules: "/etc/puppet/modules"
+    timeout: 3600
+
+- id: fuel-plugin-etckeeper-master-deployment-commit
+  type: shell
+  groups: [fuel-plugin-etckeeper-master]
+  required_for: [post_deployment_end]
+  requires: [fuel-plugin-etckeeper-master-deployment-configure]
+  parameters:
+    cmd: bash commit_etckeeper.sh
+    timeout: 600
+
